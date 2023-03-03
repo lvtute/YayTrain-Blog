@@ -1,19 +1,10 @@
 <?php
 
-/**
- * @internal never define functions inside callbacks.
- * these functions could be run multiple times; this would result in a fatal error.
- */
-
-/**
- * custom option and settings
- */
 function yayblog_settings_init()
 {
     // Register a new setting for "yayblog" page.
     register_setting('yayblog', 'yayblog_options');
 
-    // Register a new section in the "yayblog" page.
     add_settings_section(
         'yayblog_section_developers',
         __('Review settings', 'yayblog'),
@@ -21,24 +12,21 @@ function yayblog_settings_init()
         'yayblog'
     );
 
-    // Register a new field in the "yayblog_section_developers" section, inside the "yayblog" page.
     add_settings_field(
-        'yayblog_field_pill', // As of WP 4.6 this value is used only internally.
-        // Use $args' label_for to populate the id inside the callback.
+        'yayblog_point_ladder',
         __('Review', 'yayblog'),
-        'yayblog_field_pill_cb',
+        'yayblog_point_ladder_cb',
         'yayblog',
         'yayblog_section_developers',
         array(
-            'label_for'         => 'yayblog_field_pill',
+            'label_for'         => 'yayblog_point_ladder',
             'class'             => 'review_max',
             'yayblog_custom_data' => 'custom',
         )
     );
 
     add_settings_field(
-        'review_ui', // As of WP 4.6 this value is used only internally.
-        // Use $args' label_for to populate the id inside the callback.
+        'review_ui',
         __('UI', 'yayblog'),
         'review_ui_cb',
         'yayblog',
@@ -51,28 +39,10 @@ function yayblog_settings_init()
     );
 }
 
-/**
- * Register our yayblog_settings_init to the admin_init action hook.
- */
 add_action('admin_init', 'yayblog_settings_init');
 
 
-/**
- * Custom option and settings:
- *  - callback functions
- */
-
-/**
- * Pill field callbakc function.
- *
- * WordPress has magic interaction with the following keys: label_for, class.
- * - the "label_for" key value is used for the "for" attribute of the <label>.
- * - the "class" key value is used for the "class" attribute of the <tr> containing the field.
- * Note: you can add custom key value pairs to be used inside your callbacks.
- *
- * @param array $args
- */
-function yayblog_field_pill_cb($args)
+function yayblog_point_ladder_cb($args)
 {
     // Get the value of the setting we've registered with register_setting()
     $options = get_option('yayblog_options');
@@ -89,16 +59,6 @@ function yayblog_field_pill_cb($args)
 <?php
 }
 
-/**
- * Review UI callback function.
- *
- * WordPress has magic interaction with the following keys: label_for, class.
- * - the "label_for" key value is used for the "for" attribute of the <label>.
- * - the "class" key value is used for the "class" attribute of the <tr> containing the field.
- * Note: you can add custom key value pairs to be used inside your callbacks.
- *
- * @param array $args
- */
 function review_ui_cb($args)
 {
     // Get the value of the setting we've registered with register_setting()
@@ -119,9 +79,6 @@ function review_ui_cb($args)
 <?php
 }
 
-/**
- * Add the top level menu page.
- */
 function yayblog_options_page()
 {
     add_options_page(
@@ -134,15 +91,9 @@ function yayblog_options_page()
 }
 
 
-/**
- * Register our yayblog_options_page to the admin_menu action hook.
- */
 add_action('admin_menu', 'yayblog_options_page');
 
 
-/**
- * Top level menu callback function
- */
 function yayblog_options_page_html()
 {
     // check user capabilities
