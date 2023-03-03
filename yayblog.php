@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name:     Train Yay Blog
  * Plugin URI:      https://yaycommerce.com/
@@ -16,9 +17,9 @@ if (!defined('ABSPATH')) {
     die('We\'re sorry, but you can not directly access this file.');
 }
 
-define( 'YAY_BLOG_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+define('YAY_BLOG_PLUGIN_PATH', plugin_dir_path(__FILE__));
 
-if ( ! wp_installing() ) {
+if (!wp_installing()) {
     add_action(
         'plugins_loaded',
         function () {
