@@ -3,7 +3,9 @@
 function yayblog_settings_init()
 {
     // Register a new setting for "yayblog" page.
-    register_setting('yayblog', 'yayblog_options');
+    register_setting('yayblog', 'yayblog_options', [
+        'default' => array('yayblog_point_ladder' => 'out_of_10', 'review_ui' => 'icon')
+    ]);
 
     add_settings_section(
         'yayblog_section_developers',
@@ -46,12 +48,14 @@ function yayblog_point_ladder_cb($args)
 {
     // Get the value of the setting we've registered with register_setting()
     $options = get_option('yayblog_options');
+    // var_dump($options);
+    // die();
 ?>
     <select id="<?php echo esc_attr($args['label_for']); ?>" data-custom="<?php echo esc_attr($args['yayblog_custom_data']); ?>" name="yayblog_options[<?php echo esc_attr($args['label_for']); ?>]">
-        <option value="out of 5" <?php echo isset($options[$args['label_for']]) ? (selected($options[$args['label_for']], 'out of 5', false)) : (''); ?>>
+        <option value="out_of_5" <?php echo isset($options[$args['label_for']]) ? (selected($options[$args['label_for']], 'out_of_5', false)) : (''); ?>>
             <?php esc_html_e('out of 5', 'yayblog'); ?>
         </option>
-        <option value="out of 10" <?php echo isset($options[$args['label_for']]) ? (selected($options[$args['label_for']], 'out of 10', false)) : (''); ?>>
+        <option value="out_of_10" <?php echo isset($options[$args['label_for']]) ? (selected($options[$args['label_for']], 'out_of_10', false)) : (''); ?>>
             <?php esc_html_e('out of 10', 'yayblog'); ?>
         </option>
     </select>
@@ -111,7 +115,9 @@ function yayblog_options_page_html()
     }
 
     // show error/update messages
-    settings_errors('yayblog_messages');
+    // settings_errors('yayblog_messages');
+
+
 ?>
     <div class="wrap">
         <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
