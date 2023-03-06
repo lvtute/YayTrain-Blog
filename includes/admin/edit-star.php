@@ -48,6 +48,7 @@ function yayblog_review_save_postdata($post_id)
         );
     }
 }
+
 add_action('save_post', 'yayblog_review_save_postdata');
 
 add_action('add_meta_boxes', 'yayblog_add_custom_box');
