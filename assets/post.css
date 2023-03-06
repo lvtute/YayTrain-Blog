@@ -37,6 +37,7 @@
   border-radius: 10px;
   color: #ffffff;
   padding: 4px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .yay-blog-custom-title-badge .view {
@@ -46,3 +47,5 @@
 .yay-blog-custom-title-badge .rating {
   background-color: #ffb300;
 }
+
+
