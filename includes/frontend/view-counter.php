@@ -42,43 +42,22 @@ function yay_blog_title_changer($title)
 
     switch ($options['review_ui']) {
         case 'icon':
-            $title_custom_postfix = "&#128065; $views_count &#11088; $post_rating/$point_ladder";
+            $title_custom_postfix = "<span class=\"yay-blog-custom-title-icon\">&#128065; $views_count &#11088; $post_rating/$point_ladder</span>";
             break;
 
         case 'badge':
             $title_custom_postfix .= '<br>';
             $title_custom_postfix .=
-                "<span>$views_count Views</span> <span>$post_rating/$point_ladder Star</span>";
+                "<div class=\"yay-blog-custom-title-badge\">
+                <span class=\"view\">$views_count Views</span> 
+                <span class=\"rating\">$post_rating/$point_ladder Star</span>
+                </div>";
             break;
 
         case "tooltip":
-            $title = '<style>
-            .tooltip {
-              position: relative;
-              display: inline-block;
-            }
-            
-            .tooltip .tooltiptext {
-              width: 80%;
-              visibility: hidden;
-              background-color: black;
-              color: #fff;
-              text-align: center;
-              padding: 5px 0;
-              border-radius: 6px;
-              font-size: 0.6em;
-             
-              position: absolute;
-              z-index: 1;
-            }
-            
-            .tooltip:hover .tooltiptext {
-              visibility: visible;
-            }
-            </style>
-            
+            $title = '
             <div class="tooltip">' . $title .
-                '<div class="tooltiptext"><p>' . $views_count . ' View</p> <p>' . $post_rating . '/' . $point_ladder . ' Star</p></div>
+                '<div class="tooltiptext"><p>' . $views_count . ' Views</p> <p>' . $post_rating . '/' . $point_ladder . ' Star</p></div>
             </div>';
             break;
 
@@ -89,3 +68,16 @@ function yay_blog_title_changer($title)
 
     return $title . $title_custom_postfix;
 }
+
+function enqueue_post_style()
+{
+    wp_enqueue_style(
+        'yay_blog_post_style',
+        content_url("plugins/yay-train-blog/assets/post.css"),
+        array(),
+        '0.1.0',
+        'all'
+    );
+}
+
+add_action('wp_enqueue_scripts', 'enqueue_post_style');

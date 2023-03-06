@@ -1,0 +1,48 @@
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: #BDBDBD;
+  color: #fff;
+  text-align: center;
+  padding: 5px 20px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  position: absolute;
+  z-index: 1;
+  right: 0;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.yay-blog-custom-title-icon {
+  font-size: 12px;
+  margin-left: 10px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.yay-blog-custom-title-badge {
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.yay-blog-custom-title-badge span {
+  border-radius: 10px;
+  color: #ffffff;
+  padding: 4px;
+}
+
+.yay-blog-custom-title-badge .view {
+  background-color: #00acc1;
+}
+
+.yay-blog-custom-title-badge .rating {
+  background-color: #ffb300;
+}
