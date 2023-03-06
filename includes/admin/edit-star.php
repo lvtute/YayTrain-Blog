@@ -2,8 +2,14 @@
 
 function yayblog_custom_box_html($post)
 {
-    $options = get_option('yayblog_options');
-    $yayblog_point_ladder = substr($options['yayblog_point_ladder'], strlen('out_of_'));
+    $options = get_option(
+        'yayblog_options',
+        ['yayblog_point_ladder' => 'out_of_10']
+    );
+
+    $yayblog_point_ladder =
+        substr($options['yayblog_point_ladder'], strlen('out_of_'));
+
     $value = get_post_meta($post->ID, '_yayblog_review_meta_key', true);
 
     if ($value > $yayblog_point_ladder) {
